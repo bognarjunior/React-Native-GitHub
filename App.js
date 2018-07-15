@@ -1,27 +1,47 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { 
   StyleSheet, 
   Text, 
   View,
   ScrollView,
-  Platform
+  Platform,
+  TouchableOpacity
 } from 'react-native';
 
-export default class App extends React.Component {
+import Repo from './src/components/Repo';
+
+export default class App extends Component {
+  state = {
+    repos: [
+      {
+        id: 1,
+        thumbnail: 'https://avatars0.githubusercontent.com/u/7838303?s=460&v=4',
+        title: 'Repositórios do Bognar',
+        author: 'bognarjunior'
+      },
+      {
+        id: 2,
+        thumbnail: 'https://avatars0.githubusercontent.com/u/7838303?s=460&v=4',
+        title: 'Repositórios do Bognar 2',
+        author: 'bognarjunior2'
+      }
+    ]
+  };
+
+  renderRepos = () => {
+    return this.state.repos.map(repo => <Repo key={repo.id} data={repo} />)
+  }
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.headerText}>GitHub Favoritos</Text>
+          <TouchableOpacity onPress={() => {}}>
+            <Text style={styles.headerButton}>+</Text>
+          </TouchableOpacity>
         </View>
         <ScrollView contentContainerStyle={styles.repoList}>
-          <View style={styles.repo}/>
-          <View style={styles.repo}/>
-          <View style={styles.repo}/>
-          <View style={styles.repo}/>
-          <View style={styles.repo}/>
-          <View style={styles.repo}/>
-          <View style={styles.repo}/>
+          {this.renderRepos()}
         </ScrollView>
       </View>
     );
@@ -38,20 +58,22 @@ const styles = StyleSheet.create({
     paddingTop: (Platform.OS === 'ios') ? 40 : 20,
     backgroundColor: '#FFF',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    paddingHorizontal: 20,
   },
+
   headerText: {
     fontSize: 16,
     fontWeight: 'bold',
   },
+
+  headerButton: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  
   repoList: {
     padding: 20,
   },
-  repo:{
-    padding: 20,
-    backgroundColor: '#FFF',
-    height: 120,
-    borderRadius: 5,
-    marginBottom: 20,
-  }
 });
