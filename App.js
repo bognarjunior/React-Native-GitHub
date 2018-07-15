@@ -1,13 +1,28 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { 
+  StyleSheet, 
+  Text, 
+  View,
+  ScrollView,
+  Platform
+} from 'react-native';
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>GitHub Favoritos</Text>
+        </View>
+        <ScrollView contentContainerStyle={styles.repoList}>
+          <View style={styles.repo}/>
+          <View style={styles.repo}/>
+          <View style={styles.repo}/>
+          <View style={styles.repo}/>
+          <View style={styles.repo}/>
+          <View style={styles.repo}/>
+          <View style={styles.repo}/>
+        </ScrollView>
       </View>
     );
   }
@@ -16,8 +31,27 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#333',
+  },
+  header: {
+    height: (Platform.OS === 'ios') ? 90 : 70,
+    paddingTop: (Platform.OS === 'ios') ? 40 : 20,
+    backgroundColor: '#FFF',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  headerText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  repoList: {
+    padding: 20,
+  },
+  repo:{
+    padding: 20,
+    backgroundColor: '#FFF',
+    height: 120,
+    borderRadius: 5,
+    marginBottom: 20,
+  }
 });
